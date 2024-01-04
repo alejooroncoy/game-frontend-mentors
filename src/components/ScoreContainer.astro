@@ -1,0 +1,41 @@
+---
+import Score from "./Score.jsx";
+---
+
+<section class="score">
+  <div class="score-container">
+    <h3 class="score__title">Score</h3>
+    <Score className="score__amount" />
+  </div>
+</section>
+
+<style>
+  .score {
+    background-color: #fff;
+    width: min(7rem, 24%);
+    border-radius: 0.5rem;
+    height: min(80%, 10rem);
+
+    &-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    &__title {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+      font-size: clamp(0.7rem, 1vw, 2rem);
+      font-weight: 600;
+      color: var(--score-text);
+    }
+
+    :global(&__amount) {
+      font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--dark-text);
+    }
+  }
+</style>

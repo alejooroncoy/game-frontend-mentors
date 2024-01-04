@@ -1,0 +1,67 @@
+---
+import Footer from "../components/sections/Footer.astro";
+import Header from "../components/sections/Header.astro";
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="body">
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --font-family: "Barlow Semi Condensed", sans-serif;
+    --dark-text: hsl(229, 25%, 31%);
+    --score-text: hsl(229, 64%, 46%);
+    --header-outline: hsl(217, 16%, 45%);
+    --radial-gradient-from: hsl(214, 47%, 23%);
+    --radial-gradient-to: hsl(237, 49%, 15%);
+    --scissors-from: hsl(39, 89%, 49%);
+    --scissors-to: hsl(40, 84%, 53%);
+    --paper-from: hsl(230, 89%, 62%);
+    --paper-to: hsl(230, 89%, 65%);
+    --rock-from: hsl(349, 71%, 52%);
+    --rock-to: hsl(349, 70%, 56%);
+    --lizard-from: hsl(261, 73%, 60%);
+    --lizard-to: hsl(261, 72%, 63%);
+    --spock-from: hsl(189, 59%, 53%);
+    --spock-to: hsl(189, 58%, 57%);
+  }
+  .body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-image: radial-gradient(
+      circle at top,
+      var(--radial-gradient-from),
+      var(--radial-gradient-to)
+    );
+    background-repeat: no-repeat;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
