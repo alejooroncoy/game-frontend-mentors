@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import { BASE } from "../../constants";
 
 export const Piece = forwardRef(
   ({ piece, style = {}, className = "" }, ref) => {
@@ -8,7 +9,7 @@ export const Piece = forwardRef(
         className={"piece ".concat(className).trimEnd()}
         style={{
           ...style,
-          backgroundImage: `url("${`/pieces/icon-${piece.name}.svg`}")`,
+          backgroundImage: `url("${`${BASE}/pieces/icon-${piece.name}.svg`}")`,
         }}
       ></article>
     );

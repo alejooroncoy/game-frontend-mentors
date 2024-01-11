@@ -1,13 +1,14 @@
 ---
 import Piece from "../Piece/Piece.astro";
 import pieces from "../../../data/pieces.json";
+import { BASE } from "../../constants";
 ---
 
 <ul class="game__pieces__list">
   {
     pieces.map((piece) => (
       <li class="game__pieces__item">
-        <a href={`/round/${piece.id}`} class="piece__link">
+        <a href={`${BASE}/round/${piece.id}`} class="piece__link">
           <Piece piece={piece} />
         </a>
       </li>

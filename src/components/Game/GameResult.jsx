@@ -10,7 +10,7 @@ const GameResult = () => {
 
   const handleClick = () => {
     $status.set("");
-    navigate("/");
+    navigate("/game-frontend-mentors");
   };
 
   return (

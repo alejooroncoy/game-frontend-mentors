@@ -15,7 +15,11 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/game-frontend-mentors/favicon.svg"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,91 +34,92 @@ const { title } = Astro.props;
     <Header />
     <slot />
     <Footer />
-  </body><style is:global>
-    :root {
-      --font-family: "Barlow Semi Condensed", sans-serif;
-      --dark-text: hsl(229, 25%, 31%);
-      --score-text: hsl(229, 64%, 46%);
-      --header-outline: hsl(217, 16%, 45%);
-      --radial-gradient-from: hsl(214, 47%, 23%);
-      --radial-gradient-to: hsl(237, 49%, 15%);
-      --scissors-from: hsl(39, 89%, 49%);
-      --scissors-to: hsl(40, 84%, 53%);
-      --paper-from: hsl(230, 89%, 62%);
-      --paper-to: hsl(230, 89%, 65%);
-      --rock-from: hsl(349, 71%, 52%);
-      --rock-to: hsl(349, 70%, 56%);
-      --lizard-from: hsl(261, 73%, 60%);
-      --lizard-to: hsl(261, 72%, 63%);
-      --spock-from: hsl(189, 59%, 53%);
-      --spock-to: hsl(189, 58%, 57%);
-    }
-    .body {
-      margin: 0;
-      padding: 0;
-      font-family: var(--font-family);
-      background-image: radial-gradient(
-        circle at top,
-        var(--radial-gradient-from),
-        var(--radial-gradient-to)
-      );
-      background-repeat: no-repeat;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-    }
-  </style>
-
-  <style is:global>
-    .piece {
-      --measure: clamp(3rem, 15vw, 5.5rem);
-      cursor: pointer;
-      background-color: #eaeaea;
-      width: var(--measure);
-      height: var(--measure);
-      border-radius: 50%;
-      background-size: min(40%, 6rem);
-      background-repeat: no-repeat;
-      background-position: center center;
-      position: relative;
-      box-shadow:
-        0 0 0 max(0.5rem, 0.85vw) var(--color-to),
-        0 4px 0 max(0.5rem, 0.8vw) var(--color-from),
-        inset 0 0.2rem 0rem #c3c7d3,
-        inset 0 0rem 1rem #c3c7d3;
-      transition:
-        transform 0.25s,
-        box-shadow 0.25s ease;
-      &__link {
-        text-decoration: none;
+    <style is:global>
+      :root {
+        --font-family: "Barlow Semi Condensed", sans-serif;
+        --dark-text: hsl(229, 25%, 31%);
+        --score-text: hsl(229, 64%, 46%);
+        --header-outline: hsl(217, 16%, 45%);
+        --radial-gradient-from: hsl(214, 47%, 23%);
+        --radial-gradient-to: hsl(237, 49%, 15%);
+        --scissors-from: hsl(39, 89%, 49%);
+        --scissors-to: hsl(40, 84%, 53%);
+        --paper-from: hsl(230, 89%, 62%);
+        --paper-to: hsl(230, 89%, 65%);
+        --rock-from: hsl(349, 71%, 52%);
+        --rock-to: hsl(349, 70%, 56%);
+        --lizard-from: hsl(261, 73%, 60%);
+        --lizard-to: hsl(261, 72%, 63%);
+        --spock-from: hsl(189, 59%, 53%);
+        --spock-to: hsl(189, 58%, 57%);
       }
-      &:active {
-        transform: scale(0.95);
+      .body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--font-family);
+        background-image: radial-gradient(
+          circle at top,
+          var(--radial-gradient-from),
+          var(--radial-gradient-to)
+        );
+        background-repeat: no-repeat;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
       }
+    </style>
 
-      &--picked {
-        cursor: auto;
-        --measure: clamp(7rem, 20vw, 12.5rem);
+    <style is:global>
+      .piece {
+        --measure: clamp(3rem, 15vw, 5.5rem);
+        cursor: pointer;
+        background-color: #eaeaea;
+        width: var(--measure);
+        height: var(--measure);
+        border-radius: 50%;
+        background-size: min(40%, 6rem);
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: relative;
         box-shadow:
-          0 0 0 max(0.85rem, 0.85vw) var(--color-to),
-          0 4px 0 max(0.85rem, 0.85vw) var(--color-from),
+          0 0 0 max(0.5rem, 0.85vw) var(--color-to),
+          0 4px 0 max(0.5rem, 0.8vw) var(--color-from),
           inset 0 0.2rem 0rem #c3c7d3,
           inset 0 0rem 1rem #c3c7d3;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s ease;
+        &__link {
+          text-decoration: none;
+        }
         &:active {
-          transform: none;
+          transform: scale(0.95);
+        }
+
+        &--picked {
+          cursor: auto;
+          --measure: clamp(7rem, 20vw, 12.5rem);
+          box-shadow:
+            0 0 0 max(0.85rem, 0.85vw) var(--color-to),
+            0 4px 0 max(0.85rem, 0.85vw) var(--color-from),
+            inset 0 0.2rem 0rem #c3c7d3,
+            inset 0 0rem 1rem #c3c7d3;
+          &:active {
+            transform: none;
+          }
+        }
+        &--winner {
+          box-shadow:
+            0 0 0 max(0.85rem, 0.85vw) var(--color-to),
+            0 4px 0 max(0.85rem, 0.85vw) var(--color-from),
+            inset 0 0.2rem 0rem #c3c7d3,
+            inset 0 0rem 1rem #c3c7d3,
+            0 0 0 1.875rem rgba(255, 255, 255, 0.09),
+            0 0 0 4rem rgba(255, 255, 255, 0.06),
+            0 0 0 6.5rem rgba(255, 255, 255, 0.03);
+          z-index: 0;
         }
       }
-      &--winner {
-        box-shadow:
-          0 0 0 max(0.85rem, 0.85vw) var(--color-to),
-          0 4px 0 max(0.85rem, 0.85vw) var(--color-from),
-          inset 0 0.2rem 0rem #c3c7d3,
-          inset 0 0rem 1rem #c3c7d3,
-          0 0 0 1.875rem rgba(255, 255, 255, 0.09),
-          0 0 0 4rem rgba(255, 255, 255, 0.06),
-          0 0 0 6.5rem rgba(255, 255, 255, 0.03);
-        z-index: 0;
-      }
-    }
-  </style>
+    </style>
+  </body>
 </html>

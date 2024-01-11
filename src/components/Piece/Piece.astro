@@ -1,4 +1,6 @@
 ---
+import { BASE } from "../../constants";
+
 const { id, className = "", style = {}, piece } = Astro.props;
 ---
 
@@ -7,7 +9,7 @@ const { id, className = "", style = {}, piece } = Astro.props;
   class={"piece ".concat(className).trimEnd()}
   style={{
     ...style,
-    backgroundImage: `url("${`/pieces/icon-${piece.name}.svg`}")`,
+    backgroundImage: `url("${`${BASE}/pieces/icon-${piece.name}.svg`}")`,
   }}
   transition:name={`piece-${piece.id}`}
 >
