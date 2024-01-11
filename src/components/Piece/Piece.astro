@@ -1,0 +1,14 @@
+---
+const { id, className = "", style = {}, piece } = Astro.props;
+---
+
+<article
+  id={id}
+  class={"piece ".concat(className).trimEnd()}
+  style={{
+    ...style,
+    backgroundImage: `url("${`/pieces/icon-${piece.name}.svg`}")`,
+  }}
+  transition:name={`piece-${piece.id}`}
+>
+</article>

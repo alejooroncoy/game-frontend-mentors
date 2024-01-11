@@ -1,1 +1,22 @@
-<footer></footer>
+---
+import GameRules from "../Game/GameRules.astro";
+---
+
+<footer class="footer">
+  <GameRules />
+</footer>
+
+<style>
+  .footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 4rem;
+    box-sizing: border-box;
+    @media (width >= 768px) {
+      justify-content: flex-end;
+      padding: 0 1rem 1rem 0;
+    }
+  }
+</style>

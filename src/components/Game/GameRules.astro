@@ -1,4 +1,4 @@
-<a href="/#rules" class="button">Rules</a>
+<a href="#rules" class="button">Rules</a>
 <section id="rules" class="rules">
   <h2 class="rules__title">Rules</h2>
   <svg class="rules__svg" viewBox="0 0 340 330"
@@ -234,11 +234,11 @@
     >
   </a>
 </section>
+<div class="rules__overlay"></div>
 
 <style>
   .button {
     text-decoration: none;
-    position: static;
     --color: #c7c6c6;
     cursor: pointer;
     border-radius: 0.35rem;
@@ -250,22 +250,17 @@
     box-shadow: 0 0 0 0.1rem var(--color);
     border: none;
     font-family: var(--font-family);
-    bottom: 0;
     transition: transform 0.25s;
     &:active {
       transform: scale(0.95);
     }
-    @media (width >= 728px) {
-      position: fixed;
-      right: 0;
-      margin-right: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
   }
   .rules {
+    z-index: 3;
     position: fixed;
     overflow: hidden;
     background: #fff;
+    opacity: 0;
     box-shadow: inset 0 0rem 1rem #c3c7d3;
     inset: 0;
     display: flex;
@@ -274,24 +269,65 @@
     gap: 3rem;
     align-items: center;
     transform: translateX(-100%);
-    transition: transform 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease;
     &:target {
       transform: translateX(0);
+      opacity: 1;
+      @media (width >= 768px) {
+        pointer-events: all;
+        & + .rules__overlay {
+          inset: 0;
+          background: #0a0a0a2b;
+        }
+      }
     }
     &__title {
       text-transform: uppercase;
       margin: 0;
       font-size: 1.8rem;
       color: var(--dark-text);
+      @media (width >= 768px) {
+        flex: 1;
+      }
     }
     &__svg {
       width: min(80%, 20rem);
+      @media (width >= 768px) {
+        width: 100%;
+        order: 2;
+      }
+    }
+    &__overlay {
+      position: fixed;
+      z-index: 0;
+      transition:
+        background-color 0.25s ease,
+        inset 0.25s ease;
+    }
+    @media (width >= 768px) {
+      border-radius: 0.5rem;
+      width: min(50%, 25rem);
+      height: min-content;
+      box-sizing: border-box;
+      margin: auto;
+      padding: 2rem;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1rem 0;
+      opacity: 0;
+      transform: translateX(0);
+      pointer-events: none;
     }
   }
   .close {
     transition: transform 0.25s;
     &__svg {
       width: 1.5rem;
+      @media (width >= 768px) {
+        width: 1.25rem;
+      }
     }
     &:active {
       transform: scale(0.95);

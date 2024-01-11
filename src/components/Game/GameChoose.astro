@@ -1,0 +1,71 @@
+---
+import Piece from "../Piece/Piece.astro";
+import pieces from "../../../data/pieces.json";
+---
+
+<ul class="game__pieces__list">
+  {
+    pieces.map((piece) => (
+      <li class="game__pieces__item">
+        <a href={`/round/${piece.id}`} class="piece__link">
+          <Piece piece={piece} />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .game__pieces__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: absolute;
+    inset: 0;
+  }
+  .game__pieces__item {
+    width: min-content;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    &:nth-child(1) {
+      top: 100%;
+      left: 20%;
+      & :global(.piece) {
+        background-size: 50%;
+        --color-from: var(--lizard-from);
+        --color-to: var(--lizard-to);
+      }
+    }
+    &:nth-child(2) {
+      top: 100%;
+      left: 80%;
+      & :global(.piece) {
+        --color-from: var(--rock-from);
+        --color-to: var(--rock-to);
+      }
+    }
+    &:nth-child(3) {
+      left: 100%;
+      top: 40%;
+      & :global(.piece) {
+        --color-from: var(--paper-from);
+        --color-to: var(--paper-to);
+      }
+    }
+    &:nth-child(4) {
+      left: 50%;
+      top: 5%;
+      & :global(.piece) {
+        --color-from: var(--scissors-from);
+        --color-to: var(--scissors-to);
+      }
+    }
+    &:nth-child(5) {
+      top: 40%;
+      & :global(.piece) {
+        --color-from: var(--spock-from);
+        --color-to: var(--spock-to);
+      }
+    }
+  }
+</style>

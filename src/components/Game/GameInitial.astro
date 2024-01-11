@@ -1,6 +1,6 @@
 ---
 import GamePentagon from "./GamePentagon.astro";
-import GameChoose from "./GameChoose.jsx";
+import GameChoose from "./GameChoose.astro";
 ---
 
 <section class="game__pieces">
@@ -20,83 +20,6 @@ import GameChoose from "./GameChoose.jsx";
     }
     @media (width >= 1024px) {
       width: max(20%, 20rem);
-    }
-  }
-</style>
-
-<style is:global>
-  .game__pieces__list {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    position: absolute;
-    inset: 0;
-  }
-  .game__pieces__item {
-    width: min-content;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    &:nth-child(1) {
-      top: 100%;
-      left: 20%;
-      & .piece {
-        background-size: 50%;
-        --color-from: var(--lizard-from);
-        --color-to: var(--lizard-to);
-      }
-    }
-    &:nth-child(2) {
-      top: 100%;
-      left: 80%;
-      & .piece {
-        --color-from: var(--rock-from);
-        --color-to: var(--rock-to);
-      }
-    }
-    &:nth-child(3) {
-      left: 100%;
-      top: 40%;
-      & .piece {
-        --color-from: var(--paper-from);
-        --color-to: var(--paper-to);
-      }
-    }
-    &:nth-child(4) {
-      left: 50%;
-      top: 5%;
-      & .piece {
-        --color-from: var(--scissors-from);
-        --color-to: var(--scissors-to);
-      }
-    }
-    &:nth-child(5) {
-      top: 40%;
-      & .piece {
-        --color-from: var(--spock-from);
-        --color-to: var(--spock-to);
-      }
-    }
-  }
-
-  .piece {
-    --measure: clamp(3rem, 15vw, 5.5rem);
-    cursor: pointer;
-    background-color: #eaeaea;
-    width: var(--measure);
-    height: var(--measure);
-    border-radius: 50%;
-    background-size: min(40%, 4rem);
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: relative;
-    box-shadow:
-      0 0 0 max(0.5rem, 0.8vw) var(--color-to),
-      0 4px 0 max(0.5rem, 0.8vw) var(--color-from),
-      inset 0 0.2rem 0rem #c3c7d3,
-      inset 0 0rem 1rem #c3c7d3;
-    transition: transform 0.25s;
-    &:active {
-      transform: scale(0.95);
     }
   }
 </style>

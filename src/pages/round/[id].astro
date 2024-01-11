@@ -1,15 +1,162 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import data from "../../../data/pieces.json";
+import Piece from "../../components/Piece/Piece.astro";
+import PiecePicked from "../../components/Piece/PiecePicked";
+import GameResult from "../../components/Game/GameResult";
 
 export async function getStaticPaths() {
-  return [
-    { params: { id: "1" } },
-    { params: { id: "2" } },
-    { params: { id: "3" } },
-    { params: { id: "4" } },
-    { params: { id: "5" } },
-  ];
+  return data.map((piece) => ({
+    params: {
+      id: piece.id,
+    },
+    props: {
+      piece,
+    },
+  }));
 }
+
+const { piece } = Astro.props;
 ---
 
-<Layout title="Round" />
+<Layout title="Round">
+  <main class="main">
+    <section class="round">
+      <div class="round-container">
+        <section class="picked">
+          <h2 class="picked__title">You picked</h2>
+          <Piece
+            id="pieceUser"
+            className="piece--picked"
+            style={{
+              "--color-from": `var(--${piece.name}-from)`,
+              "--color-to": `var(--${piece.name}-to)`,
+            }}
+            piece={piece}
+          />
+        </section>
+        <GameResult client:load />
+        <PiecePicked pieceUserPicked={piece} pieces={data} client:load />
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .main {
+    flex: 1;
+    display: flex;
+  }
+</style>
+
+<style is:global>
+  .round {
+    width: 100%;
+    &-container {
+      width: min(100%, 768px);
+      display: flex;
+      margin: auto;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      align-content: center;
+      gap: 5rem clamp(2.5rem, 10vw, 8rem);
+      flex-wrap: wrap;
+      @media (width >= 768px) {
+        flex-wrap: nowrap;
+        &:has(.round__result) {
+          gap: 0;
+        }
+      }
+    }
+
+    &__result {
+      order: 3;
+      flex: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      &__title {
+        margin: 0;
+        font-size: 3rem;
+        text-transform: uppercase;
+        color: #fff;
+      }
+      &__btn {
+        cursor: pointer;
+        font-family: var(--font-family);
+        text-transform: uppercase;
+        border-radius: 0.25rem;
+        font-weight: 600;
+        text-decoration: none;
+        background-color: #fff;
+        padding: 0.5rem 15%;
+        letter-spacing: 0.0625rem;
+        color: var(--radial-gradient-to);
+        transition: transform 0.25s ease;
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+
+      @media (width >= 768px) {
+        order: 0;
+        flex: initial;
+        width: min(50%, 20rem);
+      }
+    }
+  }
+
+  .picked {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 2.25rem;
+    &__title {
+      margin: 0;
+      color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: 0.1rem;
+      z-index: 2;
+    }
+    &__loading {
+      --measure: clamp(7rem, 20vw, 12.5rem);
+      width: var(--measure);
+      height: var(--measure);
+      background-color: var(--radial-gradient-to);
+      opacity: 0.25;
+      border-radius: 50%;
+      animation: loading__fade 1 2s ease-in-out;
+    }
+    @media (width >= 768px) {
+      flex-direction: column;
+    }
+  }
+
+  @keyframes loading__fade {
+    0% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    25% {
+      transform: scale(1.2);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    75% {
+      transform: scale(1.2);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.25;
+    }
+  }
+</style>
